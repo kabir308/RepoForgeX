@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  repoforgex:
+    build: .
+    environment:
+      - GITHUB_USER=${GITHUB_USER}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_APP_ID=${GITHUB_APP_ID}
+      - GITHUB_APP_PRIVATE_KEY=${GITHUB_APP_PRIVATE_KEY}
+      - INSTALLATION_ID=${INSTALLATION_ID}
+      - REPOFORGEX_USE_SSH=${REPOFORGEX_USE_SSH:-0}
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+    restart: unless-stopped
