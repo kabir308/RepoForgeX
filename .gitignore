@@ -50,3 +50,8 @@ htmlcov/
 
 # Build artifacts
 *.whl
+
+# Test files
+test_repos.yml
+repoforgex_analytics_report.txt
+test-revolutionary-features/
