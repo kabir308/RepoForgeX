@@ -1,0 +1,12 @@
+repos:
+  - name: example-repo
+    description: "An example repository created by RepoForgeX"
+    private: true
+    template: null
+    path: null
+    owner: null
+
+options:
+  default_branch: main
+  commit_message: "Initial commit from RepoForgeX"
+  use_ssh: false
