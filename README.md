@@ -1,13 +1,25 @@
-# RepoForgeX — Hardened, Dockerized & GitHub App ready
+# RepoForgeX — Hardened, Dockerized & GitHub App ready 🚀
 
 RepoForgeX automatise la création, l'initialisation, le scaffolding et la synchronisation de nombreux repositories GitHub.
-Cette version ajoute :
+
+## ✨ Version 0.3.0 - Revolutionary Features!
+
+Cette version ajoute des **fonctionnalités révolutionnaires**:
+- 🤖 **AI-powered repository naming suggestions** - Get intelligent name suggestions based on descriptions
+- 📝 **Auto-template generation** - Automatically create issue templates, PR templates, security policies, and code of conduct
+- 📊 **Repository health scoring** - Instant health assessments with actionable recommendations
+- 📈 **Advanced analytics & insights** - Track patterns, get smart recommendations, export reports
+- 🔄 **Batch operations with rollback** - Transaction-like operations with automatic rollback on failure
+
+### Plus les fonctionnalités existantes:
 - Validation stricte de la configuration (pydantic).
 - Support d'authentification via GitHub App (JWT -> installation token).
 - Dockerfile & docker-compose pour exécution en conteneur.
 - Logs rotatifs et configuration d'environnement.
 - Tests unitaires (pytest) et CI GitHub Actions.
-- Mode dry-run, force, push parallèle (déjà existants).
+- Mode dry-run, force, push parallèle.
+
+📚 **[Read the Revolutionary Features Guide](REVOLUTIONARY_FEATURES.md)** for detailed documentation!
 
 ## Quickstart
 1. Copier .env.example -> .env et renseigner :
@@ -27,10 +39,39 @@ Cette version ajoute :
    export GITHUB_TOKEN=ghp_xxx
    python -m repoforgex.cli --config repos.yml --dry-run
    ```
-4. Docker:
+4. **Try revolutionary features:**
+   ```bash
+   # Get name suggestions, auto-generate templates, check health, and get analytics
+   python -m repoforgex.cli --config repos.yml \
+     --suggest-names \
+     --auto-templates \
+     --health-check \
+     --analytics
+   ```
+5. Docker:
    ```bash
    docker compose up --build
    ```
+
+## Revolutionary Features Quick Examples
+
+```bash
+# AI-powered name suggestions
+python -m repoforgex.cli --config repos.yml --suggest-names
+
+# Auto-generate standard templates (issue, PR, security, code of conduct)
+python -m repoforgex.cli --config repos.yml --auto-templates
+
+# Check repository health and get recommendations
+python -m repoforgex.cli --config repos.yml --health-check
+
+# Get comprehensive analytics and insights
+python -m repoforgex.cli --config repos.yml --analytics
+
+# Combine all features for maximum benefit!
+python -m repoforgex.cli --config repos.yml \
+  --suggest-names --auto-templates --health-check --analytics
+```
 
 ## Security notes
 - Ne placez jamais vos clefs / tokens dans le code. Utilisez secrets GitHub Actions ou un secret manager.
