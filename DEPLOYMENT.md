@@ -73,12 +73,12 @@ docker compose down
    - **Name**: RepoForgeX (or your preferred name)
    - **Homepage URL**: Your application URL
    - **Webhook URL**: Your webhook endpoint (optional)
-   
+
 3. Set permissions:
    - **Repository permissions**:
      - Contents: Read & Write
      - Metadata: Read-only
-   
+
 4. Generate a private key and download it
 
 5. Install the app to your user/organization

@@ -1,5 +1,11 @@
 # RepoForgeX — Hardened, Dockerized & GitHub App ready 🚀
 
+[![CI Status](https://github.com/kabir308/RepoForgeX/workflows/CI%20-%20tests%20%26%20lint/badge.svg)](https://github.com/kabir308/RepoForgeX/actions)
+[![codecov](https://codecov.io/gh/kabir308/RepoForgeX/branch/main/graph/badge.svg)](https://codecov.io/gh/kabir308/RepoForgeX)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 RepoForgeX automatise la création, l'initialisation, le scaffolding et la synchronisation de nombreux repositories GitHub.
 
 ## ✨ Version 0.3.0 - Revolutionary Features!
