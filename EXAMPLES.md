@@ -40,12 +40,12 @@ repos:
     description: "Python microservice 1"
     private: true
     template: python-basic
-    
+
   - name: python-service-2
     description: "Python microservice 2"
     private: true
     template: python-basic
-    
+
   - name: frontend-app
     description: "Frontend application"
     private: true
@@ -111,7 +111,7 @@ curl http://localhost:5000/status
 repos:
   - name: project-1
     path: /path/to/local/project-1
-    
+
   - name: project-2
     path: ./relative/path/project-2
 ```

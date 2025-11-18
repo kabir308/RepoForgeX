@@ -12,7 +12,7 @@ Which documentation needs to be updated or corrected?
 
 ## Location
 - File/Page: [e.g., README.md, EXAMPLES.md, section X]
-- URL (if applicable): 
+- URL (if applicable):
 
 ## Current State
 What does the documentation currently say?

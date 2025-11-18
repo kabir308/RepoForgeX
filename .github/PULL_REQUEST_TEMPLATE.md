@@ -18,9 +18,9 @@ Relates to #
 
 ## Changes Made
 <!-- List the key changes made in this PR -->
-- 
-- 
-- 
+-
+-
+-
 
 ## Testing
 <!-- Describe the tests you ran to verify your changes -->
@@ -32,8 +32,8 @@ Relates to #
 
 ### Test Coverage
 <!-- Describe what scenarios were tested -->
-- 
-- 
+-
+-
 
 ## Screenshots (if applicable)
 <!-- Add screenshots to demonstrate UI changes or new features -->

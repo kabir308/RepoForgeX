@@ -70,10 +70,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 black ruff isort
       - name: Run flake8
-        run: flake8 src tests --max-line-length=79 --extend-ignore=E203,W503
+        run: flake8 src tests --max-line-length=100 --extend-ignore=E203,W503
       - name: Check formatting with Black
-        run: black --check --line-length=79 src tests
+        run: black --check --line-length=100 src tests
       - name: Run ruff
         run: ruff check src tests
       - name: Check import sorting
-        run: isort --check-only --profile black --line-length 79 src tests
+        run: isort --check-only --profile black --line-length 100 src tests

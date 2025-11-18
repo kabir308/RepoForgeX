@@ -1,7 +1,8 @@
 from pathlib import Path
-from typing import List, Optional
+from typing import Optional
+
 import yaml
-from pydantic import BaseModel, Field, validator, ValidationError
+from pydantic import BaseModel, Field, ValidationError, validator
 
 
 class RepoEntry(BaseModel):
@@ -26,7 +27,7 @@ class Options(BaseModel):
 
 
 class RepoConfig(BaseModel):
-    repos: List[RepoEntry]
+    repos: list[RepoEntry]
     options: Optional[Options] = Options()
 
 
@@ -39,4 +40,3 @@ def load_and_validate(path: Path) -> RepoConfig:
     except ValidationError as e:
         raise RuntimeError(f"Invalid config schema: {e}")
     return cfg
-

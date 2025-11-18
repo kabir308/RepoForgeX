@@ -1,7 +1,8 @@
-import requests
 import logging
-from typing import Optional, Dict, Any
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from typing import Any, Optional
+
+import requests
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 logger = logging.getLogger("repoforgex.github_client")
 
@@ -17,18 +18,29 @@ class GitHubClient:
             "Accept": "application/vnd.github+json",
         }
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10),
-           retry=retry_if_exception_type(requests.exceptions.RequestException))
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception_type(requests.exceptions.RequestException),
+    )
     def repo_exists(self, owner: str, repo: str) -> bool:
         """Check if a repository exists."""
         url = f"{GITHUB_API}/repos/{owner}/{repo}"
         r = requests.get(url, headers=self.headers)
         return r.status_code == 200
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10),
-           retry=retry_if_exception_type(requests.exceptions.RequestException))
-    def create_repo(self, name: str, description: str = "", private: bool = True,
-                    owner: Optional[str] = None) -> Dict[str, Any]:
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception_type(requests.exceptions.RequestException),
+    )
+    def create_repo(
+        self,
+        name: str,
+        description: str = "",
+        private: bool = True,
+        owner: Optional[str] = None,
+    ) -> dict[str, Any]:
         """Create a new repository."""
         data = {
             "name": name,
@@ -50,12 +62,14 @@ class GitHubClient:
             r.raise_for_status()
         return r.json()
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10),
-           retry=retry_if_exception_type(requests.exceptions.RequestException))
-    def get_repo(self, owner: str, repo: str) -> Dict[str, Any]:
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception_type(requests.exceptions.RequestException),
+    )
+    def get_repo(self, owner: str, repo: str) -> dict[str, Any]:
         """Get repository information."""
         url = f"{GITHUB_API}/repos/{owner}/{repo}"
         r = requests.get(url, headers=self.headers)
         r.raise_for_status()
         return r.json()
-

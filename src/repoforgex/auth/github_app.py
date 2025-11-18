@@ -1,9 +1,10 @@
 import os
 import time
+from typing import Optional
+
 import jwt
 import requests
-from typing import Optional
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 GITHUB_API = "https://api.github.com"
 
@@ -20,7 +21,7 @@ def _load_private_key(pem_env_or_path: str) -> str:
         raise GitHubAppAuthError("No private key provided")
     p = os.path.expanduser(pem_env_or_path)
     if os.path.exists(p):
-        return open(p, "r").read()
+        return open(p).read()
     return pem_env_or_path
 
 
@@ -32,8 +33,11 @@ def create_jwt(app_id: str, private_key_pem: str, exp_seconds: int = 600) -> str
     return token
 
 
-@retry(stop=stop_after_attempt(5), wait=wait_exponential(multiplier=1, min=1, max=10),
-       retry=retry_if_exception_type(requests.exceptions.RequestException))
+@retry(
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=1, min=1, max=10),
+    retry=retry_if_exception_type(requests.exceptions.RequestException),
+)
 def get_installation_token(app_id: str, private_key_pem: str, installation_id: str) -> str:
     """
     Steps:
@@ -43,7 +47,10 @@ def get_installation_token(app_id: str, private_key_pem: str, installation_id: s
     """
     pem = _load_private_key(private_key_pem)
     jwt_token = create_jwt(app_id, pem)
-    headers = {"Authorization": f"Bearer {jwt_token}", "Accept": "application/vnd.github+json"}
+    headers = {
+        "Authorization": f"Bearer {jwt_token}",
+        "Accept": "application/vnd.github+json",
+    }
     url = f"{GITHUB_API}/app/installations/{installation_id}/access_tokens"
     r = requests.post(url, headers=headers)
     if r.status_code != 201:
@@ -64,4 +71,3 @@ def get_auth_token_from_env() -> Optional[str]:
     if app_id and private_key and installation:
         return get_installation_token(app_id, private_key, installation)
     return None
-

@@ -1,7 +1,7 @@
 # (updated to keep simple but robust)
 import shutil
-from pathlib import Path
 import subprocess
+from pathlib import Path
 
 
 def copy_template_local(template_key: str, target: Path, templates_dir: Path):
@@ -27,7 +27,12 @@ def ensure_minimal_files(target: Path, name: str, description: str = ""):
         gitignore.write_text(".DS_Store\n.env\n__pycache__/\n")
 
 
-def git_init_commit_push(local_path: Path, remote_url: str, branch: str = "main", message: str = "Initial commit"):
+def git_init_commit_push(
+    local_path: Path,
+    remote_url: str,
+    branch: str = "main",
+    message: str = "Initial commit",
+):
     """Initialize git repo, commit and push to remote."""
 
     # Initialize git if not already initialized
@@ -38,10 +43,17 @@ def git_init_commit_push(local_path: Path, remote_url: str, branch: str = "main"
     # Add remote if not exists
     result = subprocess.run(["git", "remote"], cwd=local_path, capture_output=True, text=True)
     if "origin" not in result.stdout:
-        subprocess.run(["git", "remote", "add", "origin", remote_url], cwd=local_path, check=True)
+        subprocess.run(
+            ["git", "remote", "add", "origin", remote_url],
+            cwd=local_path,
+            check=True,
+        )
 
     # Add all files, commit and push
     subprocess.run(["git", "add", "."], cwd=local_path, check=True)
-    subprocess.run(["git", "commit", "-m", message], cwd=local_path, check=False)  # May fail if nothing to commit
-    subprocess.run(["git", "push", "-u", "origin", branch], cwd=local_path, check=False)  # May fail if already pushed
-
+    subprocess.run(
+        ["git", "commit", "-m", message], cwd=local_path, check=False
+    )  # May fail if nothing to commit
+    subprocess.run(
+        ["git", "push", "-u", "origin", branch], cwd=local_path, check=False
+    )  # May fail if already pushed

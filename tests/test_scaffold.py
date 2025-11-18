@@ -1,4 +1,5 @@
 import pytest
+
 from repoforgex.scaffold import copy_template_local, ensure_minimal_files
 
 
@@ -14,4 +15,3 @@ def test_copy_template_missing_raises(tmp_path):
     templates_dir.mkdir()
     with pytest.raises(FileNotFoundError):
         copy_template_local("nonexistent", tmp_path / "target", templates_dir)
-

@@ -1,14 +1,16 @@
-import os
 import logging
-from flask import Flask, jsonify
+import os
 from pathlib import Path
 
-from .config import load_and_validate
-from .github_client import GitHubClient
-from .auth.github_app import get_auth_token_from_env
+from flask import Flask, jsonify
 
-logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"),
-                    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
+from .auth.github_app import get_auth_token_from_env
+from .config import load_and_validate
+
+logging.basicConfig(
+    level=os.environ.get("LOG_LEVEL", "INFO"),
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+)
 logger = logging.getLogger("repoforgex.web")
 
 app = Flask(__name__)
@@ -16,11 +18,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return jsonify({
-        "name": "RepoForgeX",
-        "version": "0.2.0",
-        "status": "running"
-    })
+    return jsonify({"name": "RepoForgeX", "version": "0.2.0", "status": "running"})
 
 
 @app.route("/health")
@@ -37,7 +35,14 @@ def list_repos():
             return jsonify({"error": "Config file not found"}), 404
 
         cfg = load_and_validate(config_path)
-        repos = [{"name": r.name, "description": r.description, "private": r.private} for r in cfg.repos]
+        repos = [
+            {
+                "name": r.name,
+                "description": r.description,
+                "private": r.private,
+            }
+            for r in cfg.repos
+        ]
         return jsonify({"repos": repos, "count": len(repos)})
     except Exception as e:
         logger.exception("Failed to list repos")
@@ -50,15 +55,20 @@ def status():
     try:
         token = get_auth_token_from_env()
         if not token:
-            return jsonify({"authenticated": False, "error": "No token available"}), 401
+            return (
+                jsonify({"authenticated": False, "error": "No token available"}),
+                401,
+            )
 
         user = os.environ.get("GITHUB_USER")
 
-        return jsonify({
-            "authenticated": True,
-            "user": user,
-            "auth_method": "GITHUB_APP" if os.environ.get("GITHUB_APP_ID") else "GITHUB_TOKEN"
-        })
+        return jsonify(
+            {
+                "authenticated": True,
+                "user": user,
+                "auth_method": "GITHUB_APP" if os.environ.get("GITHUB_APP_ID") else "GITHUB_TOKEN",
+            }
+        )
     except Exception as e:
         logger.exception("Failed to check status")
         return jsonify({"authenticated": False, "error": str(e)}), 500
@@ -67,4 +77,3 @@ def status():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
