@@ -60,3 +60,6 @@ demo_revolutionary_features.py
 
 # Pre-commit
 .pre-commit-cache/
+
+# Optional backup
+repo-backup/

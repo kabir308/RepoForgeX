@@ -1,0 +1,48 @@
+name: Monorepo CI (Python packages)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies & run tests for each package
+        run: |
+          set -euo pipefail
+          for pkg in packages/*; do
+            if [ -d "$pkg" ]; then
+              echo "=== Package: $pkg ==="
+              cd "$pkg"
+              if [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
+                python -m pip install --upgrade pip
+                python -m pip install -e .
+              elif [ -f "requirements.txt" ]; then
+                python -m pip install --upgrade pip
+                python -m pip install -r requirements.txt
+              else
+                echo "No install file (pyproject/setup/requirements). Skipping install for $pkg"
+              fi
+              if [ -d "tests" ] || ls *_test.py >/dev/null 2>&1 || ls tests.py >/dev/null 2>&1; then
+                python -m pytest -q || exit 1
+              else
+                echo "No tests found for $pkg"
+              fi
+              cd - >/dev/null
+            fi
+          done
+        shell: bash
