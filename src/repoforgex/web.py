@@ -86,9 +86,7 @@ def status():
                 "authenticated": True,
                 "user": user,
                 "auth_method": (
-                    "GITHUB_APP"
-                    if os.environ.get("GITHUB_APP_ID")
-                    else "GITHUB_TOKEN"
+                    "GITHUB_APP" if os.environ.get("GITHUB_APP_ID") else "GITHUB_TOKEN"
                 ),
             }
         )
@@ -172,9 +170,7 @@ def api_developer_events(developer):
     try:
         emitter = get_event_emitter()
         total_xp = emitter.get_total_xp(developer)
-        events = [
-            e.to_dict() for e in emitter.get_events() if e.developer == developer
-        ]
+        events = [e.to_dict() for e in emitter.get_events() if e.developer == developer]
 
         return jsonify(
             {
@@ -203,22 +199,16 @@ def api_generate_templates():
         templates = {}
 
         if template_type in ["all", "issue"]:
-            templates["issue_template"] = (
-                AutoTemplateGenerator.generate_issue_template(repo_type)
-            )
+            templates["issue_template"] = AutoTemplateGenerator.generate_issue_template(repo_type)
 
         if template_type in ["all", "pr"]:
             templates["pr_template"] = AutoTemplateGenerator.generate_pr_template()
 
         if template_type in ["all", "security"]:
-            templates["security_policy"] = (
-                AutoTemplateGenerator.generate_security_policy()
-            )
+            templates["security_policy"] = AutoTemplateGenerator.generate_security_policy()
 
         if template_type in ["all", "conduct"]:
-            templates["code_of_conduct"] = (
-                AutoTemplateGenerator.generate_code_of_conduct()
-            )
+            templates["code_of_conduct"] = AutoTemplateGenerator.generate_code_of_conduct()
 
         return jsonify(templates)
     except Exception as e:

@@ -1,6 +1,5 @@
 """Tests for batch operations and rollback functionality."""
 
-
 from repoforgex.batch_operations import BatchOperationManager, Operation, RepositoryBatchCreator
 
 

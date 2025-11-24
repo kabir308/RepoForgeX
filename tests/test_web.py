@@ -166,9 +166,7 @@ class TestTemplateGenerationAPI:
 
     def test_generate_pr_template(self, client):
         """Test generating only PR template."""
-        response = client.post(
-            "/api/v1/templates/generate", json={"type": "pr"}
-        )
+        response = client.post("/api/v1/templates/generate", json={"type": "pr"})
         assert response.status_code == 200
 
         data = json.loads(response.data)
@@ -177,9 +175,7 @@ class TestTemplateGenerationAPI:
 
     def test_generate_security_policy(self, client):
         """Test generating only security policy."""
-        response = client.post(
-            "/api/v1/templates/generate", json={"type": "security"}
-        )
+        response = client.post("/api/v1/templates/generate", json={"type": "security"})
         assert response.status_code == 200
 
         data = json.loads(response.data)
@@ -187,9 +183,7 @@ class TestTemplateGenerationAPI:
 
     def test_generate_code_of_conduct(self, client):
         """Test generating only code of conduct."""
-        response = client.post(
-            "/api/v1/templates/generate", json={"type": "conduct"}
-        )
+        response = client.post("/api/v1/templates/generate", json={"type": "conduct"})
         assert response.status_code == 200
 
         data = json.loads(response.data)

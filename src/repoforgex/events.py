@@ -129,8 +129,7 @@ class EventEmitter:
                 return True
             else:
                 logger.warning(
-                    f"Webhook failed with status {response.status_code}: "
-                    f"{response.text}"
+                    f"Webhook failed with status {response.status_code}: " f"{response.text}"
                 )
                 return False
         except (requests.RequestException, Exception) as e:
@@ -151,11 +150,7 @@ class EventEmitter:
         Returns:
             Total XP earned
         """
-        return sum(
-            event.xp_value
-            for event in self.events_buffer
-            if event.developer == developer
-        )
+        return sum(event.xp_value for event in self.events_buffer if event.developer == developer)
 
     def get_event_summary(self) -> Dict[str, Any]:
         """
@@ -212,9 +207,7 @@ class EventEmitter:
             filepath: Path to export file
         """
         with open(filepath, "w") as f:
-            json.dump(
-                [event.to_dict() for event in self.events_buffer], f, indent=2
-            )
+            json.dump([event.to_dict() for event in self.events_buffer], f, indent=2)
         logger.info(f"Exported {len(self.events_buffer)} events to {filepath}")
 
 

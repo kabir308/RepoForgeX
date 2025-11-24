@@ -1,4 +1,5 @@
 """Batch operations with rollback capability for repository management."""
+
 import logging
 import shutil
 from dataclasses import dataclass, field
