@@ -1,4 +1,5 @@
 """Repository analytics and insights module."""
+
 import logging
 import re
 from collections import defaultdict
@@ -80,9 +81,9 @@ class RepositoryAnalytics:
             "by_template": dict(by_template),
             "name_patterns": name_patterns,
             "most_active_owner": max(by_owner.items(), key=lambda x: x[1])[0] if by_owner else None,
-            "most_used_template": max(by_template.items(), key=lambda x: x[1])[0]
-            if by_template
-            else None,
+            "most_used_template": (
+                max(by_template.items(), key=lambda x: x[1])[0] if by_template else None
+            ),
         }
 
     def _analyze_name_patterns(self) -> dict[str, Any]:

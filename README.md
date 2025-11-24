@@ -8,9 +8,16 @@
 
 RepoForgeX automatise la création, l'initialisation, le scaffolding et la synchronisation de nombreux repositories GitHub.
 
-## ✨ Version 0.3.0 - Revolutionary Features!
+## ✨ Version 0.4.0 - NEOPlayer Integration & CI/CD Brain!
 
-Cette version ajoute des **fonctionnalités révolutionnaires**:
+Cette version transforme RepoForgeX en **CI/CD Brain** pour Kabverse v3:
+- 🎮 **NEOPlayer Integration** - Gamification complète avec système XP pour récompenser les développeurs
+- 🧠 **CI/CD Orchestration** - Webhooks et API pour orchestrer les pipelines
+- 📊 **Advanced Event System** - Tracking automatique de toutes les activités développeurs
+- 🔌 **REST API** - Endpoints pour health checks, analytics, et génération de templates
+- 🏆 **XP Rewards** - Points d'expérience pour repo creation, health scores, security policies
+
+### Fonctionnalités v0.3.0:
 - 🤖 **AI-powered repository naming suggestions** - Get intelligent name suggestions based on descriptions
 - 📝 **Auto-template generation** - Automatically create issue templates, PR templates, security policies, and code of conduct
 - 📊 **Repository health scoring** - Instant health assessments with actionable recommendations
@@ -25,7 +32,10 @@ Cette version ajoute des **fonctionnalités révolutionnaires**:
 - Tests unitaires (pytest) et CI GitHub Actions.
 - Mode dry-run, force, push parallèle.
 
-📚 **[Read the Revolutionary Features Guide](REVOLUTIONARY_FEATURES.md)** for detailed documentation!
+📚 **Documentation complète:**
+- **[Revolutionary Features Guide](REVOLUTIONARY_FEATURES.md)** - AI features & analytics
+- **[NEOPlayer Integration](NEOPLAYER_INTEGRATION.md)** - Gamification et système XP
+- **[Kabverse CI/CD Brain](KABVERSE_CICD_BRAIN.md)** - Orchestration et architecture
 
 ## Quickstart
 1. Copier .env.example -> .env et renseigner :
@@ -33,6 +43,7 @@ Cette version ajoute des **fonctionnalités révolutionnaires**:
    - ou GITHUB_APP_ID, GITHUB_APP_PRIVATE_KEY (PEM), INSTALLATION_ID pour GitHub App auth
    - GITHUB_USER
    - REPOFORGEX_USE_SSH (0/1)
+   - NEOPLAYER_WEBHOOK_URL (optionnel, pour l'intégration NEOPlayer)
 2. Installer dépendances & tests:
    ```bash
    python -m venv .venv
