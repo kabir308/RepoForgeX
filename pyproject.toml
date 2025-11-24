@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "repoforgex"
-version = "0.3.0"
-description = "Automate creation, scaffold and sync many GitHub repos with AI-powered features (hardened, Docker, GitHub App)"
+version = "0.4.0"
+description = "Automate creation, scaffold and sync many GitHub repos with AI-powered features, NEOPlayer integration, and CI/CD orchestration (hardened, Docker, GitHub App)"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
