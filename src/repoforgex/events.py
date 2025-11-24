@@ -129,7 +129,7 @@ class EventEmitter:
                 return True
             else:
                 logger.warning(
-                    f"Webhook failed with status {response.status_code}: " f"{response.text}"
+                    f"Webhook failed with status {response.status_code}: {response.text}"
                 )
                 return False
         except (requests.RequestException, Exception) as e:
